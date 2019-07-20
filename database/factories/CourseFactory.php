@@ -4,7 +4,6 @@
 
 use App\Course;
 use Faker\Generator as Faker;
-use App\Course;
 use App\Teacher;
 use App\Category;
 use App\Level;
