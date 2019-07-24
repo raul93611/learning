@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <script src="https://kit.fontawesome.com/28559843c8.js"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -73,7 +73,18 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+          @if (session('message'))
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-md-12">
+                  <div class="alert alert-{{ session('message')[0] }}" role="alert">
+                    {{ session('message')[1] }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endif
+          @yield('content')
         </main>
     </div>
 </body>
