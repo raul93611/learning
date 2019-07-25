@@ -80,15 +80,15 @@ class LoginController extends Controller
           $success = $exception-> getMessage();
           \DB::rollBack();
         }
-
-        if($success){
-          \DB::commit();
-          auth()-> loginUsingId($user-> id);
-          return redirect('/home');
-        }
-
-        session()-> flash('message', ['danger', $success]);
-        return redirect('login');
       }
+
+      if($success){
+        \DB::commit();
+        auth()-> loginUsingId($user-> id);
+        return redirect('/home');
+      }
+
+      session()-> flash('message', ['danger', $success]);
+      return redirect('login');
     }
 }

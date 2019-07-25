@@ -67,6 +67,13 @@
                                 </div>
                             </li>
                         @endguest
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ __('Idioma') }}</a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown03">
+                            <a class="dropdown-item" href="{{ route('set_language', ['es']) }}">{{  __('Español') }}</a>
+                            <a class="dropdown-item" href="{{ route('set_language', ['en']) }}">{{  __('Ingles') }}</a>
+                          </div>
+                        </li>
                     </ul>
                 </div>
             </div>
