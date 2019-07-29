@@ -49,6 +49,7 @@
                                 </li>
                             @endif
                         @else
+                          @include('partials.navigations.' . \App\User::navigation())
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -78,7 +79,7 @@
                 </div>
             </div>
         </nav>
-
+        @yield('jumbotron')
         <main class="py-4">
           @if (session('message'))
             <div class="container">

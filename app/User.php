@@ -10,6 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public static function navigation(){
+      return auth()-> check() ? auth()-> user()-> role-> name : 'guest';
+    }
 
     protected static function boot(){
       parent::boot();

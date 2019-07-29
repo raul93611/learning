@@ -8,6 +8,7 @@ use Socialite;
 use App\User;
 use App\UserSocialAccount;
 use App\Student;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -39,6 +40,12 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function logout(Request $request){
+      auth()-> logout();
+      session()-> flush();
+      return redirect('/login');
     }
 
     public function redirectToProvider(string $driver){

@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Intervention\Image\Facades\Image;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,3 +24,11 @@ Route::get('/set_lanugage/{lang}', 'Controller@setLanguage')-> name('set_languag
 
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider')-> name('social_auth');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('/images/{path}/{attachment}', function($path, $attachment){
+  $file = sprintf('storage/%s/%s', $path, $attachment);
+
+  if(File::exists($file)){
+    return Image::make($file)-> response();
+  }
+});

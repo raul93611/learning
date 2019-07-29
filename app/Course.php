@@ -37,4 +37,12 @@ class Course extends Model
   public function students(){
     return $this-> belongsToMany(Student::class);
   }
+
+  public function pathAttachment(){
+    return '/images/courses/' . $this-> picture;
+  }
+
+  public function getRatingAttribute(){
+    return $this-> reviews-> avg('rating');
+  }
 }
