@@ -25,6 +25,10 @@ Route::get('/set_lanugage/{lang}', 'Controller@setLanguage')-> name('set_languag
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider')-> name('social_auth');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
+Route::group(['prefix' => 'course'], function(){
+  Route::get('/{course}', 'CourseController@show')-> name('course.detail');
+});
+
 Route::get('/images/{path}/{attachment}', function($path, $attachment){
   $file = sprintf('storage/%s/%s', $path, $attachment);
 

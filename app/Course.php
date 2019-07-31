@@ -10,6 +10,12 @@ class Course extends Model
   const PENDING = 2;
   const REJECTED = 3;
 
+  protected $withCount = ['reviews', 'students'];
+
+  public function getRouteKeyName(){
+    return 'slug';
+  }
+
   public function level(){
     return $this-> belongsTo(Level::class);
   }
@@ -44,5 +50,9 @@ class Course extends Model
 
   public function getRatingAttribute(){
     return $this-> reviews-> avg('rating');
+  }
+
+  public function relatedCourses(){
+    return Course::with('reviews')-> whereCategoryId($this-> category_id)-> where('id', '!=', $this-> id)-> latest()-> limit(6)-> get();
   }
 }
