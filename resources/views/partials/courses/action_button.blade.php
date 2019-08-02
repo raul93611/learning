@@ -1,7 +1,7 @@
 @auth
   @can ('opt_for_course', $course)
     @can ('subscribe', $course)
-      <a href="#" class="btn btn-warning btn-block"><i class="fas fa-bolt"></i> {{ __('Subscribirme') }}</a>
+      <a href="{{ route('subscriptions.plans') }}" class="btn btn-warning btn-block"><i class="fas fa-bolt"></i> {{ __('Subscribirme') }}</a>
     @else
       @can ('inscribe', $course)
         <a href="#" class="btn btn-warning btn-block"><i class="fas fa-bolt"></i> {{ __('Inscribirme') }}</a>

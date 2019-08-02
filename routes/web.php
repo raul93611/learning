@@ -29,6 +29,11 @@ Route::group(['prefix' => 'course'], function(){
   Route::get('/{course}', 'CourseController@show')-> name('course.detail');
 });
 
+Route::group(['prefix' => 'subscriptions'], function(){
+  Route::get('/plans', 'SubscriptionController@plans')-> name('subscriptions.plans');
+  Route::post('/process_subscription', 'SubscriptionController@processSubscription')-> name('subscriptions.process_subscription');
+});
+
 Route::get('/images/{path}/{attachment}', function($path, $attachment){
   $file = sprintf('storage/%s/%s', $path, $attachment);
 

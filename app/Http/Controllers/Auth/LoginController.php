@@ -92,7 +92,7 @@ class LoginController extends Controller
       if($success){
         \DB::commit();
         auth()-> loginUsingId($user-> id);
-        return redirect('/home');
+        return redirect('/');
       }
 
       session()-> flash('message', ['danger', $success]);

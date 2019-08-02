@@ -1,0 +1,32 @@
+<template>
+  <div class="">
+    <stripe-checkout button="Suscribirme" buttonClass="btn btn-primary" :stripe-key="stripe_key" :product="product">
+
+    </stripe-checkout>
+  </div>
+</template>
+
+<script>
+  import { StripeCheckout } from 'vue-stripe'
+
+  export default{
+    components: {
+      StripeCheckout
+    },
+    props: {
+      stripe_key: '',
+      name: '',
+      amount: '',
+      description: ''
+    },
+    computed: {
+      product(){
+        return {
+          name: this.name,
+          amount: parseFloat(this.amount),
+          description: this.description
+        }
+      }
+    }
+  }
+</script>
