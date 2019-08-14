@@ -1,9 +1,7 @@
 <template>
-  <div class="">
-    <stripe-checkout button="Suscribirme" buttonClass="btn btn-primary" :stripe-key="stripe_key" :product="product">
+  <stripe-checkout button="Suscribirme" buttonClass="btn btn-primary btn-block" :stripe-key="stripe_key" :product="product">
 
-    </stripe-checkout>
-  </div>
+  </stripe-checkout>
 </template>
 
 <script>
