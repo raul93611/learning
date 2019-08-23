@@ -29,21 +29,20 @@
               <td>{{ $subscription-> stripe_plan }}</td>
               <td>{{ $subscription-> stripe_id }}</td>
               <td>{{ $subscription-> quantity }}</td>
-              <td>{{ $subscription-> created_at }}</td>
               <td>{{ $subscription-> created_at-> format('d/m/Y') }}</td>
-              <td>{{ $subscription-> ends_at ? $subscription-> ends_at-> format('d/m/Y') : __('Subscriptcion activa') }}</td>
+              <td>{{ $subscription-> ends_at ? $subscription-> ends_at-> format('d/m/Y') : __('Subscripcion activa') }}</td>
               <td>
                 @if ($subscription-> ends_at)
                   <form class="" action="{{ route('subscriptions.resume') }}" method="post">
                     @csrf
                     <input type="hidden" name="plan" value="{{ $subscription-> name }}">
-                    <button type="button" class="btn btn-success" name="button">{{ __('Reanudar') }}</button>
+                    <button type="submit" class="btn btn-success" name="button">{{ __('Reanudar') }}</button>
                   </form>
                 @else
                   <form class="" action="{{ route('subscriptions.cancel') }}" method="post">
                     @csrf
                     <input type="hidden" name="plan" value="{{ $subscription-> name }}">
-                    <button type="button" class="btn btn-success" name="button">{{ __('Cancelar') }}</button>
+                    <button type="submit" class="btn btn-success" name="button">{{ __('Cancelar') }}</button>
                   </form>
                 @endif
               </td>
