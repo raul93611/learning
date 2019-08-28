@@ -21,4 +21,9 @@ class CourseController extends Controller
 
     return view('course.detail', compact('course', 'relatedCourses'));
   }
+
+  public function inscribe(Course $course){
+    $course-> students()-> attach(auth()-> user()-> student-> id);
+    return back()-> with('message', ['success', __('Inscrito correctamente.')]);
+  }
 }
