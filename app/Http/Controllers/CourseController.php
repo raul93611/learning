@@ -29,4 +29,12 @@ class CourseController extends Controller
     Mail::to($course-> teacher-> user)-> send(new NewStudentInCourse($course, auth()-> user()-> name));
     return back()-> with('message', ['success', __('Inscrito correctamente.')]);
   }
+
+  public function subscribed(){
+    $courses = Course::whereHas('students', function($query){
+      $query-> where('user_id', auth()-> id());
+    })-> get();
+    
+    return view('courses.subscribed', compact('courses'));
+  }
 }
