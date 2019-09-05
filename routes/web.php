@@ -26,8 +26,11 @@ Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider')-> name('
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::group(['prefix' => 'course'], function(){
-  Route::get('/subscribed', 'CourseController@subscribed')-> name('courses.subscribed')-> middleware('auth');
-  Route::get('/{course}/inscribe', 'CourseController@inscribe')-> name('courses.inscribe')-> middleware('auth');
+  Route::group(['middleware' => ['auth']], function(){
+    Route::get('/subscribed', 'CourseController@subscribed')-> name('courses.subscribed');
+    Route::get('/{course}/inscribe', 'CourseController@inscribe')-> name('courses.inscribe');
+    Route::post('/add_review', 'CourseController@addReview')-> name('courses.add_review');
+  });
   Route::get('/{course}', 'CourseController@show')-> name('course.detail');
 });
 

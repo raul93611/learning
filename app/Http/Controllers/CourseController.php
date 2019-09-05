@@ -34,7 +34,11 @@ class CourseController extends Controller
     $courses = Course::whereHas('students', function($query){
       $query-> where('user_id', auth()-> id());
     })-> get();
-    
+
     return view('course.subscribed', compact('courses'));
+  }
+
+  public function addReview(){
+    
   }
 }
