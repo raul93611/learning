@@ -28,8 +28,8 @@ Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallba
 Route::group(['prefix' => 'course'], function(){
   Route::group(['middleware' => ['auth']], function(){
     Route::get('/subscribed', 'CourseController@subscribed')-> name('courses.subscribed');
-    Route::get('/{course}/inscribe', 'CourseController@inscribe')-> name('courses.inscribe');
     Route::post('/add_review', 'CourseController@addReview')-> name('courses.add_review');
+    Route::get('/{course}/inscribe', 'CourseController@inscribe')-> name('courses.inscribe');
   });
   Route::get('/{course}', 'CourseController@show')-> name('course.detail');
 });

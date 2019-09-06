@@ -4,7 +4,7 @@
       <div class="col-md-12 text-center">
         <h2 class="text-muted">{{ __('Escribe una valoracion.') }}</h2>
         <hr>
-        <form class="form-inline" id="rating_form" action="index.html" method="post">
+        <form class="form-inline" id="rating_form" action="{{ route('courses.add_review') }}" method="post">
           @csrf
           <h5 id="list_rating" class="text-center mr-3">
             <i class="fas fa-star" data-number="1"></i>
