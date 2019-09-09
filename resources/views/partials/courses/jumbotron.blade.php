@@ -11,7 +11,7 @@
       <h4>{{ __('Fecha de actualización') }}: {{ $course-> updated_at-> format('d/m/Y') }}</h4>
       <h4>{{ __('Estudiantes inscritos') }}: {{ $course-> students_count }}</h4>
       <h4>{{ __('Numero de valoraciones') }}: {{ $course-> reviews_count }}</h4>
-      @include('partials.courses.rating', ['course' => $course])
+      @include('partials.courses.rating', ['rating' => $course-> rating])
     </div>
     <div class="col-md-2">
       @include('partials.courses.action_button')

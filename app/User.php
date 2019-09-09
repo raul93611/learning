@@ -50,6 +50,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function pathAttachment(){
+      return '/images/users/' . $this-> picture;
+    }
+
     public function role(){
       return $this-> belongsTo(Role::class);
     }

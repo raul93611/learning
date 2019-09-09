@@ -57,3 +57,12 @@ Route::get('/images/{path}/{attachment}', function($path, $attachment){
     return Image::make($file)-> response();
   }
 });
+
+Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function(){
+  Route::get('/', 'ProfileController@index')-> name('profile.index');
+  Route::put('/', 'ProfileController@update')-> name('profile.update');
+});
+
+Route::group(['prefix' => 'solicitude', 'middleware' => ['auth']], function(){
+  Route::post('/teacher', 'SolicitudeController@teacher')-> name('solicitude.teacher');
+});

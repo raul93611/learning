@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-8 p-3 ">
           <h4>{{ $relatedCourse-> name }}</h4>
-          @include('partials.courses.rating', ['course' => $relatedCourse])
+          @include('partials.courses.rating', ['rating' => $relatedCourse-> rating])
         </div>
       </div>
     </div>
