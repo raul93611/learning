@@ -59,11 +59,68 @@
             </form>
           </div>
         </div>
+      @else
+        <div class="card">
+          <div class="card-header">
+            {{ __('Administrar mis cursos') }}
+          </div>
+          <div class="card-body">
+            <a href="{{ route('teacher.courses') }}" class="btn btn-primary btn-block">{{ __('Administrar ahora') }}</a>
+          </div>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-header">
+            {{ __('Mis estudiantes') }}
+          </div>
+          <div class="card-body">
+            <table class="table table-striped table-bordered" id="students_table">
+              <thead>
+                <tr>
+                  <th>{{ __('ID') }}</th>
+                  <th>{{ __('Nombre') }}</th>
+                  <th>{{ __('Email') }}</th>
+                  <th>{{ __('Cursos') }}</th>
+                  <th>{{ __('Acciones') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       @endif
     </div>
   </div>
 </div>
+@include('partials.modal')
 @endsection
 @push('scripts')
-  <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
+  <script>
+    $(document).ready(function(){
+      var dt;
+      var modal = $('#app_modal');
+      var dt = $('#students_table').DataTable({
+        pageLength: 5,
+        lengthMenu: [5, 10, 25, 50, 75, 100],
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('teacher.students') }}',
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
+        },
+        columns: [
+          {data: 'user.id'},
+          {data: 'user.name'},
+          {data: 'user.email'},
+          {data: 'courses_formatted'},
+          {data: 'actions'}
+        ]
+      });
+    });
+  </script>
 @endpush

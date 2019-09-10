@@ -66,3 +66,8 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function(){
 Route::group(['prefix' => 'solicitude', 'middleware' => ['auth']], function(){
   Route::post('/teacher', 'SolicitudeController@teacher')-> name('solicitude.teacher');
 });
+
+Route::group(['prefix' => 'teacher', 'middleware' => ['auth']], function(){
+  Route::post('/courses', 'TeacherController@courses')-> name('teacher.courses');
+  Route::post('/students', 'TeacherController@students')-> name('teacher.students');
+});
