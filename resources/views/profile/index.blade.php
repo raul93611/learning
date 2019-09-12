@@ -121,6 +121,17 @@
           {data: 'actions'}
         ]
       });
+
+      $('#students_table').on('click', '.btnEmail', function(){
+        var id = $(this).data('id');
+        modal.find('.modal-title').text('{{ __('Enviar mensaje') }}');
+        modal.find('#modalAction').text('{{ __('Enviar mensaje') }}').show();
+        var form = $('<form id="studentMessage"></form>');
+        form.append('<input type="hidden" name="user_id" value"' + id + '">');
+        form.append('<textarea class="form-control" name="message"></textarea>');
+        modal.find('.modal-body').html(form);
+        modal.modal();
+      });
     });
   </script>
 @endpush
