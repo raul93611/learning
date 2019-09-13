@@ -20,4 +20,8 @@ class TeacherController extends Controller
   public function courses(){
 
   }
+
+  public function sendMessageToStudent(){
+    return response()-> json(['res' => false]);
+  }
 }

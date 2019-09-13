@@ -132,6 +132,28 @@
         modal.find('.modal-body').html(form);
         modal.modal();
       });
+
+      $('#modalAction').click(function(){
+        $.ajax({
+          url: '{{ route('teacher.send_message_to_student') }}',
+          type: 'POST',
+          headers:{
+            'x-csrf-token': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+            info: $('studentMessage').serialize()
+          },
+          success: function(res){
+            console.log('asdsadsa1222');
+            if(res.res){
+              modal.find('#modalAction').hide();
+              modal.find('.modal-body').html('<div class="alert alert-success">{{ __('Mensaje enviado correctamente.') }}</div>');
+            }else{
+              modal.find('.modal-body').html('<div class="alert alert-danger">{{ __('Mensaje fallo por algun motivo.') }}</div>');
+            }
+          }
+        });
+      });
     });
   </script>
 @endpush
