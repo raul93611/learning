@@ -177,5 +177,9 @@ return [
         'time'                  => 'hora',
         'subject'               => 'asunto',
         'message'               => 'mensaje',
+        'requirements.0' => 'Requisito 1',
+        'requirements.1' => 'Requisito 2',
+        'goals.0' => 'Meta 1',
+        'goals.1' => 'Meta 2'
     ],
 ];

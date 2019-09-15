@@ -126,14 +126,15 @@
         var id = $(this).data('id');
         modal.find('.modal-title').text('{{ __('Enviar mensaje') }}');
         modal.find('#modalAction').text('{{ __('Enviar mensaje') }}').show();
-        var form = $('<form id="studentMessage"></form>');
-        form.append('<input type="hidden" name="user_id" value"' + id + '">');
+        var form = $('<form id="studentMessage" method="POST"></form>');
+        form.append('<input type="hidden" name="user_id" value="' + id + '">');
         form.append('<textarea class="form-control" name="message"></textarea>');
         modal.find('.modal-body').html(form);
         modal.modal();
       });
 
       $('#modalAction').click(function(){
+        console.log($('#studentMessage').serialize());
         $.ajax({
           url: '{{ route('teacher.send_message_to_student') }}',
           type: 'POST',
@@ -141,10 +142,10 @@
             'x-csrf-token': $('meta[name="csrf-token"]').attr('content')
           },
           data: {
-            info: $('studentMessage').serialize()
+            info: $('#studentMessage').serialize()
           },
           success: function(res){
-            console.log('asdsadsa1222');
+
             if(res.res){
               modal.find('#modalAction').hide();
               modal.find('.modal-body').html('<div class="alert alert-success">{{ __('Mensaje enviado correctamente.') }}</div>');

@@ -11,6 +11,7 @@
 |
 */
 use Intervention\Image\Facades\Image;
+use App\Role;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,6 +31,11 @@ Route::group(['prefix' => 'course'], function(){
     Route::get('/subscribed', 'CourseController@subscribed')-> name('courses.subscribed');
     Route::post('/add_review', 'CourseController@addReview')-> name('courses.add_review');
     Route::get('/{course}/inscribe', 'CourseController@inscribe')-> name('courses.inscribe');
+    Route::get('/create', 'CourseController@create')-> name('courses.create')-> middleware([sprintf('role:%s', Role::TEACHER)]);
+    Route::post('/store', 'CourseController@store')-> name('courses.store')-> middleware([sprintf('role:%s', Role::TEACHER)]);
+    Route::put('/{course}/update', 'CourseController@update')-> name('courses.update')-> middleware([sprintf('role:%s', Role::TEACHER)]);
+    Route::get('/{course}/edit', 'CourseController@edit')-> name('courses.edit')-> middleware([sprintf('role:%s', Role::TEACHER)]);
+    Route::delete('/{course}/destroy', 'CourseController@destroy')-> name('courses.destroy')-> middleware([sprintf('role:%s', Role::TEACHER)]);
   });
   Route::get('/{course}', 'CourseController@show')-> name('course.detail');
 });
@@ -68,7 +74,7 @@ Route::group(['prefix' => 'solicitude', 'middleware' => ['auth']], function(){
 });
 
 Route::group(['prefix' => 'teacher', 'middleware' => ['auth']], function(){
-  Route::post('/courses', 'TeacherController@courses')-> name('teacher.courses');
+  Route::get('/courses', 'TeacherController@courses')-> name('teacher.courses');
   Route::get('/students', 'TeacherController@students')-> name('teacher.students');
   Route::post('/send_message_to_student', 'TeacherController@sendMessageToStudent')-> name('teacher.send_message_to_student');
 });

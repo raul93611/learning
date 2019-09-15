@@ -14,6 +14,48 @@ class Course extends Model
   const REJECTED = 3;
 
   protected $withCount = ['reviews', 'students'];
+  protected $fillable = ['teacher_id', 'level_id', 'category_id', 'name', 'description', 'picture', 'status'];
+
+  public static function boot(){
+    parent::boot();
+
+    static::saving(function(Course $course){
+      if(!\App::runningInConsole()){
+        $course-> slug = str_slug($course-> name, '-');
+      }
+    });
+
+
+    static::saved(function(Course $course){
+      if(!\App::runningInConsole()){
+        if(request('requirements')){
+          foreach (request('requirements') as $key => $requirement_input) {
+            if($requirement_input){
+              Requirement::updateOrCreate([
+                'id' => request('requirement_id' . $key)
+              ], [
+                'course_id' => $course-> id,
+                'requirement' => $requirement_input
+              ]);
+            }
+          }
+        }
+
+        if(request('goals')){
+          foreach (request('goals') as $key => $goal_input) {
+            if($goal_input){
+              Goal::updateOrCreate([
+                'id' => request('goal_id' . $key)
+              ], [
+                'course_id' => $course-> id,
+                'goal' => $goal_input
+              ]);
+            }
+          }
+        }
+      }
+    });
+  }
 
   public function getRouteKeyName(){
     return 'slug';
