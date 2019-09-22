@@ -48,6 +48,23 @@ class CourseRequest extends FormRequest
             'goals.0' => 'required_with:goals.1'
           ];
           break;
+        case 'PUT':
+          return [
+            'name' => 'required|min:5',
+            'description' => 'required|min:30',
+            'level_id' => [
+              'required',
+              Rule::exists('levels', 'id')
+            ],
+            'category_id' => [
+              'required',
+              Rule::exists('categories', 'id')
+            ],
+            'picture' => 'sometimes|image|mimes:jpg,jpeg,png',
+            'requirements.0' => 'required_with:requirements.1',
+            'goals.0' => 'required_with:goals.1'
+          ];
+          break;
         default:
           break;
       }

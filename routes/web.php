@@ -78,3 +78,9 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth']], function(){
   Route::get('/students', 'TeacherController@students')-> name('teacher.students');
   Route::post('/send_message_to_student', 'TeacherController@sendMessageToStudent')-> name('teacher.send_message_to_student');
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', sprintf('role:%s', \App\Role::ADMIN)]], function(){
+  Route::get('/courses', 'AdminController@courses')-> name('admin.courses');
+  Route::get('/courses_json', 'AdminController@coursesJson')-> name('admin.courses_json');
+  Route::post('/courses/updateStatus', 'AdminController@updateCourseStatus')-> name('admin.update_course_status');
+});
